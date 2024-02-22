@@ -6,4 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Activity2">
 
+    <!-- TextView con el texto "BIENVENIDO A LA APP" -->
+    <TextView
+        android:id="@+id/bienvenidoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BIENVENIDO A LA APP"
+        android:textSize="20sp"
+        android:textColor="#FF0000"
+        android:fontFamily="cursive"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

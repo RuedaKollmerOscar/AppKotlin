@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import androidx.constraintlayout.widget.ConstraintLayout
 
-class MainActivity : AppCompatActivity() {
+class Activity1 : AppCompatActivity() {
 
     lateinit var rootLayout: ConstraintLayout
     lateinit var secondLayout: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_1)
         rootLayout = this.findViewById(R.id.rootLayout)
         secondLayout = this.findViewById(R.id.secondLayout)
         main()
