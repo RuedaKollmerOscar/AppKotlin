@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">AppKotlin</string>
-    <string name="hola_mundo">Hola manines</string>
+    <string name="activity_1">Esto es el activity1</string>
 </resources>

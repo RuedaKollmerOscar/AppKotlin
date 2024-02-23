@@ -22,7 +22,7 @@
             android:id="@+id/hola_mundo_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hola_mundo"
+            android:text="@string/activity_1"
             android:textColor="#000000"
             app:layout_constraintBottom_toTopOf="@id/cambiarFondo"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,5 +52,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="8dp" />
+
+        <!-- Campo de entrada de texto (EditText) -->
+        <EditText
+            android:id="@+id/inputText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Ingresa texto"
+            app:layout_constraintTop_toBottomOf="@id/cambiarActivity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
