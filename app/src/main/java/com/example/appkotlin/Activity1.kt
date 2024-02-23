@@ -46,17 +46,7 @@ class Activity1 : AppCompatActivity(), OnClickListener {
         if (v!!.id == R.id.cambiarFondo) {
             secondLayout.setBackgroundColor(Color.WHITE)
         } else if (v.id == R.id.cambiarActivity) {
-            // Obtener texto del EditText
-            val inputText = findViewById<EditText>(R.id.inputText)
-            val textoIngresado = inputText.text.toString()
-
-            // Crear Intent para pasar al Activity2
             val activity2Intent = Intent(this, Activity2::class.java)
-
-            // Agregar el texto al Intent
-            activity2Intent.putExtra("MENSAJE", textoIngresado)
-
-            // Iniciar el Activity2
             startActivity(activity2Intent)
         }
     }
