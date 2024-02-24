@@ -25,7 +25,6 @@ class LoginFragment : Fragment(), OnClickListener {
     lateinit var btnRegister: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var navController: NavController
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +33,6 @@ class LoginFragment : Fragment(), OnClickListener {
         navController = findNavController()
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         edtEmail = view.findViewById(R.id.edtEmail)
@@ -44,17 +42,13 @@ class LoginFragment : Fragment(), OnClickListener {
         btnLogin.setOnClickListener(this)
         btnRegister.setOnClickListener(this)
     }
-
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnLogin -> {
-                val sEmail = edtEmail.text.toString()
-                val sPassword = edtPassword.text.toString()
-
                 if (checkFields()) {
                     Snackbar.make(requireView(), "Por favor, completa todos los campos.", Snackbar.LENGTH_SHORT).show()
                 } else {
-                    auth.signInWithEmailAndPassword(sEmail, sPassword)
+                    auth.signInWithEmailAndPassword(edtEmail.text.toString(), edtPassword.text.toString())
                         .addOnCompleteListener(requireActivity()) { task ->
                             if (task.isSuccessful) {
                                 val activity1: Intent = Intent(requireActivity(), Activity1::class.java)
