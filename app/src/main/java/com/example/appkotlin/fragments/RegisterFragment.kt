@@ -15,9 +15,7 @@ import com.example.appkotlin.Activity1
 import com.example.appkotlin.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -64,14 +62,16 @@ class RegisterFragment : Fragment(), OnClickListener {
                                 requireActivity().finish()
                             } else {
                                 val exception = task.exception
-                                if (exception != null) {
-                                    val errorMessage = when (exception) {
-                                        is FirebaseAuthWeakPasswordException -> "La contraseña es débil. Debe tener al menos 8 caracteres."
-                                        is FirebaseAuthInvalidCredentialsException -> "Credenciales inválidas. Revisa el formato del correo electrónico."
-                                        is FirebaseAuthUserCollisionException -> "Esta cuenta ya está en uso."
+                                if (exception is FirebaseAuthException) {
+                                    val errorMessage = when (exception.errorCode) {
+                                        "ERROR_WEAK_PASSWORD" -> "La contraseña es débil. Debe tener al menos 8 caracteres."
+                                        "ERROR_INVALID_CREDENTIAL" -> "Credenciales inválidas. Revisa el formato del correo electrónico."
+                                        "ERROR_EMAIL_ALREADY_IN_USE" -> "Esta cuenta ya está en uso."
                                         else -> "Error al crear la cuenta. Por favor, inténtalo nuevamente."
                                     }
                                     Snackbar.make(requireView(), errorMessage, Snackbar.LENGTH_SHORT).show()
+                                } else {
+                                    Snackbar.make(requireView(), "Error al crear la cuenta. Por favor, inténtalo nuevamente.", Snackbar.LENGTH_SHORT).show()
                                 }
                             }
                         }

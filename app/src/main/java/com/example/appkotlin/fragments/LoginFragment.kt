@@ -14,6 +14,7 @@ import com.example.appkotlin.Activity1
 import com.example.appkotlin.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -55,11 +56,19 @@ class LoginFragment : Fragment(), OnClickListener {
                                 startActivity(activity1)
                                 requireActivity().finish()
                             } else {
-                                Snackbar.make(
-                                    requireView(),
-                                    "Inicio de sesión fallido. Revisa tu correo electrónico y contraseña.",
-                                    Snackbar.LENGTH_SHORT
-                                ).show()
+                                val exception = task.exception
+                                if (exception is FirebaseAuthException) {
+                                    val errorMessage = when (exception.errorCode) {
+                                        "ERROR_INVALID_EMAIL" -> "Correo electrónico inválido."
+                                        "ERROR_WRONG_PASSWORD" -> "Contraseña incorrecta."
+                                        "ERROR_USER_NOT_FOUND" -> "No hay ninguna cuenta asociada a este correo electrónico."
+                                        "ERROR_USER_DISABLED" -> "Esta cuenta ha sido deshabilitada."
+                                        else -> "Error al iniciar sesión. Por favor, inténtalo nuevamente."
+                                    }
+                                    Snackbar.make(requireView(), errorMessage, Snackbar.LENGTH_SHORT).show()
+                                } else {
+                                    Snackbar.make(requireView(), "Error al iniciar sesión. Por favor, inténtalo nuevamente.", Snackbar.LENGTH_SHORT).show()
+                                }
                             }
                         }
                 }
